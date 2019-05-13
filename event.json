@@ -1,0 +1,19 @@
+{
+  "source": [
+    "aws.ecr"
+  ],
+  "detail-type": [
+    "AWS API Call via CloudTrail"
+  ],
+  "resources": [
+   "arn:aws:ecr:ap-southeast-2:028815121700:repository/frank"
+   ],
+  "detail": {
+    "eventSource": [
+      "ecr.amazonaws.com"
+    ],
+    "eventName": [
+      "PutImage"
+    ]
+  }
+}

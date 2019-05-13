@@ -1,0 +1,10 @@
+../../../../bin/jp
+../jp/__init__.py
+../jp/__pycache__/__init__.cpython-36.pyc
+PKG-INFO
+SOURCES.txt
+dependency_links.txt
+entry_points.txt
+not-zip-safe
+requires.txt
+top_level.txt

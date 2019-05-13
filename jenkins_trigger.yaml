@@ -1,0 +1,151 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: ---this is stack setup ecr update trigge jenkins job
+
+Parameters: 
+   RepoArn:
+     Description: the ecr repo look like  arn:aws:ecr:${AWS:Region}:${AWS:Account}:repository/name of repo
+     Type: String
+   
+   JenkinsHostUrl:
+     Description: this your jenkins host Url + port http://xxx:8080
+     Type: String
+   
+   JenkinsJobName:
+     Description: the jenknis job you want hook up 
+     Type: String
+
+   LambdaSG:
+     Description: SG attach Lambda
+     Type: String
+
+   LambdaSubnet:
+     Description: the subnet which lambda running
+     Type: String
+
+   LambdaLay:
+    Description: lambda Layer name 
+    Type: String
+    Default: arn:aws:lambda:ap-southeast-2:028815121700:layer:jenkins:3
+   
+   S3Bucket:
+     Description: bucket name where you upload your code 
+     Type: String
+     Default: myyellow-infra-build
+   
+   S3Key:
+     Description: key of code file 
+     Type: String
+     Default: script/lambda.py
+
+Resources: 
+   EcrEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Ecr Repo update Notification 
+      EventPattern:
+        source:
+          - aws.ecr 
+        detail-type:
+          - AWS API Call via CloudTrail 
+        resources:
+          - !Ref RepoArn  
+        detail:
+          eventSource:
+            - ecr.amazonaws.com 
+          eventName:
+            - PutImage 
+      State: ENABLED
+      Targets:
+        Arn: !GetAtt TrggerJenkins.Arn
+        Id: !Ref TrggerJenkins
+   
+   EcrEventPermission:
+     DependsOn: TrggerJenkins
+     Type: AWS::Lambda::Permission
+     Properties:
+       Action: lambda:InvokeFunction
+       FunctionName: !Ref TrggerJenkins
+       Principal: events.amazonaws.com
+       SourceArn: !GetAtt EcrEvent.Arn
+
+   TrggerJenkins:
+     Type: AWS::Lambda::Function
+     Properties:
+       Description: This function is using to hook with ecr update and jenkins job
+       Handler: lambda.lambda_handler
+       MemorySize: 128
+       Role: !Ref lambdarole
+       Runtime: python3.6
+       Layers:
+         - !Ref LambdaLay
+       VpcConfig:
+         SecurityGroupIds:
+           - !Ref LambdaSG
+         SubnetIds:
+           - !Ref LambdaSubnet
+       Environment:
+         Variables:
+           JenkinsHostUrl: !Ref JenkinsHostUrl 
+           JenkinsJobName: !Ref JenkinsJobName        
+       Code:
+         S3Bucket: !Ref S3Bucket
+         S3Key: !Ref S3Key
+
+   lambdarole:
+     Type: AWS::IAM::Role
+     Properties:
+       Path: /
+       AssumeRolePolicyDocument: 
+         Version: "2012-10-17"
+         Statement:
+           - 
+              Effect: Allow
+              Principal: 
+                Service:
+                   - lambda.amazonaws.com
+              Action:
+                - sts:AssumeRole
+
+       Policies:
+         - 
+          PolicyName: !Sub '${AWS::StackName}-lambdarole'
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+               - 
+                 Effect: "Allow"
+                 Action: 
+                    - "cloudwatch:PutMetricData"
+                 Resource: "*"
+
+               - 
+                 Effect: "Allow"
+                 Action:
+                    - "ec2:DescribeRegions"
+                    - "ec2:DescribeVpnConnections"
+                 Resource:  "*"
+
+               - 
+                 Effect: "Allow"
+                 Action: 
+                    - "logs:CreateLogGroup"
+                 Resource: "arn:aws:logs:ap-southeast-2:${AWS:Account}:*"
+
+               - 
+                 Effect: "Allow"
+                 Action:
+                    - "logs:CreateLogStream"
+                    - "logs:PutLogEvents"
+                 Resource:  "arn:aws:logs:${AWS:Region}:${AWS:Account}:log-group:/aws/lambda/*:*"  
+
+               - 
+                 Effect: "Allow"
+                 Action: 
+                    - "ec2:CreateNetworkInterface"
+                    - "ec2:DeleteNetworkInterface"
+                    - "ec2:DescribeNetworkInterfaces"
+                 Resource: "*"
+   
+
+
+ 
