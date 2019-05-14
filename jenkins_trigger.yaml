@@ -27,15 +27,18 @@ Parameters:
     Type: String
     Default: arn:aws:lambda:ap-southeast-2:028815121700:layer:jenkins:3
    
-   S3Bucket:
-     Description: bucket name where you upload your code 
+   jenkusername:
+     Description: jenkins username 
      Type: String
-     Default: myyellow-infra-build
+     Default: admin
+     NoEcho: ture
    
-   S3Key:
-     Description: key of code file 
+   jenkpassword:
+     Description: jenkin password 
      Type: String
-     Default: script/lambda.py
+     Default: myyellow
+     NoEcho: ture
+    
 
 Resources: 
    EcrEvent:
@@ -74,7 +77,7 @@ Resources:
        Description: This function is using to hook with ecr update and jenkins job
        Handler: lambda.lambda_handler
        MemorySize: 128
-       Role: !Ref lambdarole
+       Role: !GetAtt lambdarole.Arn
        Runtime: python3.6
        Layers:
          - !Ref LambdaLay
@@ -83,13 +86,15 @@ Resources:
            - !Ref LambdaSG
          SubnetIds:
            - !Ref LambdaSubnet
-       Environment:
-         Variables:
-           JenkinsHostUrl: !Ref JenkinsHostUrl 
-           JenkinsJobName: !Ref JenkinsJobName        
+    
        Code:
-         S3Bucket: !Ref S3Bucket
-         S3Key: !Ref S3Key
+         ZipFile: !Sub |
+            import jenkins
+            def lambda_handler(event, context):
+            # code here
+            server = jenkins.Jenkins('${JenkinsJobName}', username='${jenkusername}, password='${jenkpassword}')
+            server.build_job('${JenkinsJobName}')
+
 
    lambdarole:
      Type: AWS::IAM::Role
@@ -105,7 +110,6 @@ Resources:
                    - lambda.amazonaws.com
               Action:
                 - sts:AssumeRole
-
        Policies:
          - 
           PolicyName: !Sub '${AWS::StackName}-lambdarole'
@@ -129,14 +133,14 @@ Resources:
                  Effect: "Allow"
                  Action: 
                     - "logs:CreateLogGroup"
-                 Resource: "arn:aws:logs:ap-southeast-2:${AWS:Account}:*"
+                 Resource: "*"
 
                - 
                  Effect: "Allow"
                  Action:
                     - "logs:CreateLogStream"
                     - "logs:PutLogEvents"
-                 Resource:  "arn:aws:logs:${AWS:Region}:${AWS:Account}:log-group:/aws/lambda/*:*"  
+                 Resource:  "*"  
 
                - 
                  Effect: "Allow"
