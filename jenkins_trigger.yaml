@@ -20,7 +20,7 @@ Parameters:
 
    LambdaSubnet:
      Description: the subnet which lambda running
-     Type: String
+     Type: <AWS::EC2::Subnet::Id>
 
    LambdaLay:
     Description: lambda Layer name 
@@ -92,9 +92,9 @@ Resources:
          ZipFile: !Sub |
             import jenkins
             def lambda_handler(event, context):
-            # code here
-            server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkusername}', password='${jenkpassword}')
-            server.build_job('${JenkinsJobName}')
+              # action code here you can add more here
+              server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkusername}', password='${jenkpassword}')
+              server.build_job('${JenkinsJobName}')
 
 
    lambdarole:
