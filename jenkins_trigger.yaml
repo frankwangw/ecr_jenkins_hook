@@ -27,17 +27,6 @@ Parameters:
     Type: String
     Default: arn:aws:lambda:ap-southeast-2:028815121700:layer:jenkins:3
    
-   jenkusername:
-     Description: jenkins username 
-     Type: String
-     Default: admin
-     NoEcho: ture
-   
-   jenkpassword:
-     Description: jenkin password 
-     Type: String
-     Default: myyellow
-     NoEcho: ture
     
 
 Resources: 
@@ -93,7 +82,7 @@ Resources:
             import jenkins
             def lambda_handler(event, context):
               # action code here you can add more here
-              server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkusername}', password='${jenkpassword}')
+              server = jenkins.Jenkins('${JenkinsHostUrl}', username='{{resolve:ssm-secure:/myyellow/jenkins/username:1}}', password='{{resolve:ssm-secure:/myyellow/jenkins/password:1}}')
               server.build_job('${JenkinsJobName}')
 
 
