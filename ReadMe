@@ -1,0 +1,16 @@
+#this solution to solve the issue of ecr trigger jenkins job
+the solution using cloudwatch event ----> lambda function--->jenkins job
+lambda using jenkins python lib to trigger jenkins
+
+
+#Input information
+subnet ---> need be same subnet as jenkin do
+jenkinsurl ---> which jenkinsurl + port
+jenkins job ---> which job you want kick off
+ecr repo ----> which repo you want mointor
+
+
+#perpare job before you are launching this solution
+1. add jenkins user and password in parameter store and replace it in cloudformatin
+2. upload layer to lambda which you can find in repo
+

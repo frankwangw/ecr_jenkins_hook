@@ -3,9 +3,6 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
-  <component name="ProjectDictionaryState">
-    <dictionary name="fw" />
-  </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -21,14 +18,6 @@
     </entry>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (new)" project-jdk-type="Python SDK" />
-  <component name="accountSettings">
-    <option name="activeProfile" value="profile:default" />
-    <option name="recentlyUsedProfiles">
-      <list>
-        <option value="profile:default" />
-      </list>
-    </option>
-  </component>
   <component name="lambda">
     <option name="showAllHandlerGutterIcons" value="true" />
   </component>
