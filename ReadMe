@@ -14,3 +14,7 @@ ecr repo ----> which repo you want mointor
 1. add jenkins user and password in parameter store and replace it in cloudformatin
 2. upload layer to lambda which you can find in repo
 
+#code structure
+jenkins_trigger.yaml is cloudformaiton
+layer folder is layer you need upload to lambda layer
+event.json is sample of ecr putimage this is just exmaple of event you trigger the job
