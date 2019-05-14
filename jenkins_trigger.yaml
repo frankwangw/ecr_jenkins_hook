@@ -76,7 +76,7 @@ Resources:
      Type: AWS::Lambda::Function
      Properties:
        Description: This function is using to hook with ecr update and jenkins job
-       Handler: lambda.lambda_handler
+       Handler: index.lambda_handler
        MemorySize: 128
        Role: !GetAtt lambdarole.Arn
        Runtime: python3.6
@@ -93,7 +93,7 @@ Resources:
             import jenkins
             def lambda_handler(event, context):
             # code here
-            server = jenkins.Jenkins('${JenkinsJobName}', username='${jenkusername}, password='${jenkpassword}')
+            server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkusername}', password='${jenkpassword}')
             server.build_job('${JenkinsJobName}')
 
 
