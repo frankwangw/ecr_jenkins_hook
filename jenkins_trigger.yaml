@@ -31,13 +31,13 @@ Parameters:
       Description: username of jenkins
       Type: String
       NoEcho: true
-      Default: "{{ssm:/myyellow/jenkins/username:1}}"
+      Default: admin
 
    jenkinspassword:
       Description: username of jenkins
       Type: String
       NoEcho: true
-      Default: "{{ssm:/myyellow/jenkins/password:1}}"
+      Default: myyellow
    
     
 
