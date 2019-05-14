@@ -59,6 +59,7 @@ Resources:
             - PutImage 
       State: ENABLED
       Targets:
+       -
         Arn: !GetAtt TrggerJenkins.Arn
         Id: !Ref TrggerJenkins
    
