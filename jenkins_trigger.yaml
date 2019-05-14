@@ -20,12 +20,24 @@ Parameters:
 
    LambdaSubnet:
      Description: the subnet which lambda running
-     Type: <AWS::EC2::Subnet::Id>
+     Type: AWS::EC2::Subnet::Id
 
    LambdaLay:
     Description: lambda Layer name 
     Type: String
     Default: arn:aws:lambda:ap-southeast-2:028815121700:layer:jenkins:3
+
+   jenkinsusername:
+      Description: username of jenkins
+      Type: String
+      NoEcho: true
+      Default: "{{ssm:/myyellow/jenkins/username:1}}"
+
+   jenkinspassword:
+      Description: username of jenkins
+      Type: String
+      NoEcho: true
+      Default: "{{ssm:/myyellow/jenkins/password:1}}"
    
     
 
@@ -82,7 +94,7 @@ Resources:
             import jenkins
             def lambda_handler(event, context):
               # action code here you can add more here
-              server = jenkins.Jenkins('${JenkinsHostUrl}', username='{{resolve:ssm-secure:/myyellow/jenkins/username:1}}', password='{{resolve:ssm-secure:/myyellow/jenkins/password:1}}')
+              server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkinsusername}', password='${jenkinspassword}')
               server.build_job('${JenkinsJobName}')
 
 
