@@ -34,7 +34,7 @@ Parameters:
       Default: admin
 
    jenkinspassword:
-      Description: username of jenkins
+      Description: password of jenkins
       Type: String
       NoEcho: true
       Default: myyellow
