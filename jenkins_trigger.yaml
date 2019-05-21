@@ -20,7 +20,7 @@ Parameters:
 
    LambdaSubnet:
      Description: the subnet which lambda running
-     Type: AWS::EC2::Subnet::Id
+     Type: List<AWS::EC2::Subnet::Id>
 
    LambdaLay:
     Description: lambda Layer name 
@@ -55,8 +55,11 @@ Resources:
           eventSource:
             - ecr.amazonaws.com 
           eventName:
-            - PutImage 
+            - PutImage
       State: ENABLED
+      Name: !Sub
+        - ${job}-hook
+        - {job : !Ref JenkinsJobName}
       Targets:
        -
         Arn: !GetAtt TrggerJenkins.Arn
@@ -85,15 +88,17 @@ Resources:
          SecurityGroupIds:
            - !Ref LambdaSG
          SubnetIds:
-           - !Ref LambdaSubnet
+           - !Select [0,!Ref LambdaSubnet]
+           - !Select [1,!Ref LambdaSubnet]
     
        Code:
          ZipFile: !Sub |
             import jenkins
+            import json
             def lambda_handler(event, context):
-              repoarn = event['resources']['ARN']
-              print(repoarn)
-              if reponarn == ${RepoArn}:
+             repoarn = event["detail"]["resources"][0]["ARN"]
+             print(repoarn)
+              if ${RepoArn} in str(repoarn) :
                 # action code here you can add more here
                   server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkinsusername}', password='${jenkinspassword}')
                   server.build_job('${JenkinsJobName}')
