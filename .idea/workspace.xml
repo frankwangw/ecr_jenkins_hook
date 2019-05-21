@@ -25,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jenkins_trigger.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+            <state relative-caret-position="125">
+              <caret line="100" column="41" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -44,11 +44,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1440" />
-    <option name="y" value="23" />
-    <option name="width" value="2560" />
-    <option name="height" value="1417" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="76" />
+    <option name="y" value="74" />
+    <option name="width" value="1188" />
+    <option name="height" value="580" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -100,18 +100,18 @@
       <updated>1557799003367</updated>
       <workItem from="1557799005201" duration="3208000" />
       <workItem from="1558317500688" duration="136000" />
-      <workItem from="1558399425951" duration="33000" />
+      <workItem from="1558399425951" duration="927000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3377000" />
+    <option name="totallyTimeSpent" value="4271000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1440" y="23" width="2560" height="1417" extended-state="6" />
+    <frame x="76" y="74" width="1188" height="580" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14257348" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31326354" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="aws.explorer" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -126,7 +126,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.16905661" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.45901638" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -148,8 +148,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jenkins_trigger.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+        <state relative-caret-position="125">
+          <caret line="100" column="41" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
         </state>
       </provider>
     </entry>

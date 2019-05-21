@@ -91,10 +91,14 @@ Resources:
          ZipFile: !Sub |
             import jenkins
             def lambda_handler(event, context):
-              # action code here you can add more here
-              server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkinsusername}', password='${jenkinspassword}')
-              server.build_job('${JenkinsJobName}')
-
+              repoarn = event['resources']['ARN']
+              print(repoarn)
+              if reponarn == ${RepoArn}:
+                # action code here you can add more here
+                  server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkinsusername}', password='${jenkinspassword}')
+                  server.build_job('${JenkinsJobName}')
+              else:
+                 print ("not match repo")
 
    lambdarole:
      Type: AWS::IAM::Role
