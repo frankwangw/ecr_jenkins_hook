@@ -97,12 +97,13 @@ Resources:
             import json
             def lambda_handler(event, context):
              repoarn = event["detail"]["resources"][0]["ARN"]
+             findname = str(${RepoName})
              print(repoarn)
-              if ${RepoName} in str(repoarn):
+             if findname in str(repoarn):
                 # action code here you can add more here
                   server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkinsusername}', password='${jenkinspassword}')
                   server.build_job('${JenkinsJobName}')
-              else:
+             else:
                  print ("not match repo")
 
    lambdarole:
