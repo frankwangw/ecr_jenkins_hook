@@ -2,8 +2,8 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: ---this is stack setup ecr update trigge jenkins job
 
 Parameters: 
-   RepoArn:
-     Description: the ecr repo look like  arn:aws:ecr:${AWS:Region}:${AWS:Account}:repository/name of repo
+   RepoName:
+     Description: Repo Name not full path
      Type: String
    
    JenkinsHostUrl:
