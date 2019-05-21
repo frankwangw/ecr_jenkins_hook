@@ -98,7 +98,7 @@ Resources:
             def lambda_handler(event, context):
              repoarn = event["detail"]["resources"][0]["ARN"]
              print(repoarn)
-              if ${RepoArn} in str(repoarn):
+              if ${RepoName} in str(repoarn):
                 # action code here you can add more here
                   server = jenkins.Jenkins('${JenkinsHostUrl}', username='${jenkinsusername}', password='${jenkinspassword}')
                   server.build_job('${JenkinsJobName}')
