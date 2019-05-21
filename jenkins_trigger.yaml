@@ -50,9 +50,7 @@ Resources:
         source:
           - aws.ecr 
         detail-type:
-          - AWS API Call via CloudTrail 
-        resources:
-          - !Ref RepoArn  
+          - AWS API Call via CloudTrail
         detail:
           eventSource:
             - ecr.amazonaws.com 
