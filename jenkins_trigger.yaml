@@ -25,19 +25,17 @@ Parameters:
    LambdaLay:
     Description: lambda Layer name 
     Type: String
-    Default: arn:aws:lambda:ap-southeast-2:028815121700:layer:jenkins:3
 
    jenkinsusername:
       Description: username of jenkins
       Type: String
       NoEcho: true
-      Default: admin
+
 
    jenkinspassword:
       Description: password of jenkins
       Type: String
       NoEcho: true
-      Default: myyellow
    
     
 
