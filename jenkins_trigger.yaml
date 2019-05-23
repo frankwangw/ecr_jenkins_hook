@@ -97,7 +97,7 @@ Resources:
             import json
             def lambda_handler(event, context):
              repoarn = event["detail"]["resources"][0]["ARN"]
-             findname = str(${RepoName})
+             findname = "${RepoName}"
              print(repoarn)
              if findname in str(repoarn):
                 # action code here you can add more here
